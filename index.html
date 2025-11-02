@@ -25,20 +25,24 @@
         <!-- Add Birthday Form -->
         <div class="bg-white border border-gray-200 rounded-lg p-6 mb-6 shadow-sm">
             <h2 class="text-lg font-semibold text-gray-900 mb-4">Add Birthday</h2>
-            <form id="addBirthdayForm" class="flex flex-col sm:flex-row gap-3">
-                <input type="text" id="nameInput" placeholder="Name" required
-                    class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                <div class="flex-1 relative">
-                    <input type="text" id="dateInput" placeholder="ddmmyyyy" maxlength="10" required
-                        class="w-full px-4 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <button type="button" id="datePickerBtn"
-                        class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-500 hover:text-gray-700 focus:outline-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                    </button>
-                    <input type="date" id="hiddenDatePicker" class="hidden">
+            <form id="addBirthdayForm" class="flex flex-col gap-3">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="nameInput" placeholder="Name" required
+                        class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <div class="flex-1 relative">
+                        <input type="text" id="dateInput" placeholder="ddmmyyyy" maxlength="10" required
+                            class="w-full px-4 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button type="button" id="datePickerBtn"
+                            class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </button>
+                        <input type="date" id="hiddenDatePicker" class="hidden">
+                    </div>
                 </div>
+                <textarea id="notesInput" placeholder="Notes (e.g., gift ideas, preferences)" rows="2"
+                    class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"></textarea>
                 <button type="submit"
                     class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors">
                     Add Birthday
@@ -66,6 +70,42 @@
                 <div class="p-6 text-center text-gray-500">
                     No birthdays added yet
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div class="p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Edit Birthday</h3>
+                <form id="editBirthdayForm" class="flex flex-col gap-3">
+                    <input type="text" id="editNameInput" placeholder="Name" required
+                        class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <div class="relative">
+                        <input type="text" id="editDateInput" placeholder="ddmmyyyy" maxlength="10" required
+                            class="w-full px-4 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button type="button" id="editDatePickerBtn"
+                            class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </button>
+                        <input type="date" id="editHiddenDatePicker" class="hidden">
+                    </div>
+                    <textarea id="editNotesInput" placeholder="Notes (e.g., gift ideas, preferences)" rows="3"
+                        class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"></textarea>
+                    <div class="flex gap-3 justify-end mt-2">
+                        <button type="button" id="cancelEdit"
+                            class="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -120,6 +160,7 @@
     <script>
         let birthdays = [];
         let deleteTarget = null;
+        let editTarget = null;
 
         // Encoding and Decoding Functions
         function encodeData(data) {
@@ -157,16 +198,15 @@
 
         // Date Parsing and Validation Functions
         function parseDateDDMMYYYY(dateString) {
-            // Remove any non-digit characters
-            const cleanDate = dateString.replace(/\D/g, '');
+            const cleaned = dateString.replace(/\D/g, '');
             
-            if (cleanDate.length !== 8) {
+            if (cleaned.length !== 8) {
                 return null;
             }
             
-            const day = parseInt(cleanDate.substring(0, 2), 10);
-            const month = parseInt(cleanDate.substring(2, 4), 10);
-            const year = parseInt(cleanDate.substring(4, 8), 10);
+            const day = parseInt(cleaned.substring(0, 2), 10);
+            const month = parseInt(cleaned.substring(2, 4), 10);
+            const year = parseInt(cleaned.substring(4, 8), 10);
             
             if (isNaN(day) || isNaN(month) || isNaN(year)) {
                 return null;
@@ -202,7 +242,6 @@
         }
 
         function autoFormatDateInput(value) {
-            // Remove all non-digit characters
             const cleaned = value.replace(/\D/g, '');
             
             let formatted = '';
@@ -222,17 +261,6 @@
             const month = String(date.getMonth() + 1).padStart(2, '0');
             const year = date.getFullYear();
             return `${day}/${month}/${year}`;
-        }
-
-        function convertDisplayToDatePicker(displayDate) {
-            const cleaned = displayDate.replace(/\D/g, '');
-            if (cleaned.length !== 8) return '';
-            
-            const day = cleaned.substring(0, 2);
-            const month = cleaned.substring(2, 4);
-            const year = cleaned.substring(4, 8);
-            
-            return `${year}-${month}-${day}`;
         }
 
         // UI Functions
@@ -292,6 +320,12 @@
             return `${day} ${month}`;
         }
 
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         // Display Functions
         function updateCountdown() {
             const countdownDiv = document.getElementById('countdown');
@@ -311,9 +345,10 @@
             
             countdownDiv.innerHTML = `
                 <div>
-                    <p class="text-2xl font-semibold text-gray-900 mb-1">${next.name}</p>
+                    <p class="text-2xl font-semibold text-gray-900 mb-1">${escapeHtml(next.name)}</p>
                     <p class="text-gray-600 mb-2">${formatDateForDisplay(date)} · Turning ${age}</p>
                     <p class="text-3xl font-bold text-blue-600">${days} ${days === 1 ? 'day' : 'days'}</p>
+                    ${next.notes ? `<p class="text-sm text-gray-500 mt-2">${escapeHtml(next.notes)}</p>` : ''}
                 </div>
             `;
         }
@@ -336,17 +371,24 @@
                 const displayDate = formatDateDDMMYYYY(birthday.date);
                 
                 return `
-                    <div class="p-4 flex justify-between items-center hover:bg-gray-50 transition-colors">
-                        <div>
-                            <p class="font-medium text-gray-900">${birthday.name}</p>
-                            <p class="text-sm text-gray-600">${displayDate} · Turning ${age}</p>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <span class="text-sm font-medium text-blue-600">${days} ${days === 1 ? 'day' : 'days'}</span>
-                            <button onclick="deleteBirthday(${index})"
-                                class="text-red-600 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-2 py-1">
-                                Delete
-                            </button>
+                    <div class="p-4 hover:bg-gray-50 transition-colors">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-900">${escapeHtml(birthday.name)}</p>
+                                <p class="text-sm text-gray-600">${displayDate} · Turning ${age}</p>
+                                ${birthday.notes ? `<p class="text-sm text-gray-500 mt-1 italic">${escapeHtml(birthday.notes)}</p>` : ''}
+                            </div>
+                            <div class="flex items-center gap-3 ml-4">
+                                <span class="text-sm font-medium text-blue-600 whitespace-nowrap">${days} ${days === 1 ? 'day' : 'days'}</span>
+                                <button onclick="editBirthday(${index})"
+                                    class="text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1">
+                                    Edit
+                                </button>
+                                <button onclick="deleteBirthday(${index})"
+                                    class="text-red-600 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 rounded px-2 py-1">
+                                    Delete
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -356,7 +398,7 @@
         }
 
         // CRUD Functions
-        function addBirthday(name, dateString) {
+        function addBirthday(name, dateString, notes) {
             const parsedDate = parseDateDDMMYYYY(dateString);
             
             if (!parsedDate) {
@@ -366,7 +408,8 @@
             
             birthdays.push({ 
                 name, 
-                date: parsedDate.toISOString()
+                date: parsedDate.toISOString(),
+                notes: notes || ''
             });
             saveToLocalStorage();
             renderBirthdays();
@@ -374,20 +417,64 @@
             return true;
         }
 
+        function editBirthday(index) {
+            const sorted = [...birthdays].sort((a, b) => {
+                return calculateDaysUntil(a.date).days - calculateDaysUntil(b.date).days;
+            });
+            const birthdayToEdit = sorted[index];
+            const originalIndex = birthdays.findIndex(b => 
+                b.name === birthdayToEdit.name && 
+                b.date === birthdayToEdit.date && 
+                b.notes === birthdayToEdit.notes
+            );
+            
+            editTarget = originalIndex;
+            
+            document.getElementById('editNameInput').value = birthdayToEdit.name;
+            document.getElementById('editDateInput').value = formatDateDDMMYYYY(birthdayToEdit.date);
+            document.getElementById('editNotesInput').value = birthdayToEdit.notes || '';
+            
+            showModal('editModal');
+        }
+
+        function updateBirthday(index, name, dateString, notes) {
+            const parsedDate = parseDateDDMMYYYY(dateString);
+            
+            if (!parsedDate) {
+                showToast('Invalid date. Use format: ddmmyyyy');
+                return false;
+            }
+            
+            birthdays[index] = {
+                name,
+                date: parsedDate.toISOString(),
+                notes: notes || ''
+            };
+            
+            saveToLocalStorage();
+            renderBirthdays();
+            showToast('Birthday updated successfully');
+            return true;
+        }
+
         function deleteBirthday(index) {
-            deleteTarget = index;
+            const sorted = [...birthdays].sort((a, b) => {
+                return calculateDaysUntil(a.date).days - calculateDaysUntil(b.date).days;
+            });
+            const birthdayToDelete = sorted[index];
+            const originalIndex = birthdays.findIndex(b => 
+                b.name === birthdayToDelete.name && 
+                b.date === birthdayToDelete.date && 
+                b.notes === birthdayToDelete.notes
+            );
+            
+            deleteTarget = originalIndex;
             showModal('deleteModal');
         }
 
         function confirmDeleteBirthday() {
             if (deleteTarget !== null) {
-                const sorted = [...birthdays].sort((a, b) => {
-                    return calculateDaysUntil(a.date).days - calculateDaysUntil(b.date).days;
-                });
-                const birthdayToDelete = sorted[deleteTarget];
-                const originalIndex = birthdays.findIndex(b => b.name === birthdayToDelete.name && b.date === birthdayToDelete.date);
-                
-                birthdays.splice(originalIndex, 1);
+                birthdays.splice(deleteTarget, 1);
                 saveToLocalStorage();
                 renderBirthdays();
                 showToast('Birthday deleted');
@@ -441,12 +528,11 @@
             reader.readAsText(file);
         }
 
-        // Event Listeners
+        // Event Listeners - Add Form
         const dateInput = document.getElementById('dateInput');
         const hiddenDatePicker = document.getElementById('hiddenDatePicker');
         const datePickerBtn = document.getElementById('datePickerBtn');
 
-        // Auto-format date input as user types
         dateInput.addEventListener('input', (e) => {
             const cursorPosition = e.target.selectionStart;
             const oldValue = e.target.value;
@@ -454,18 +540,15 @@
             
             e.target.value = newValue;
             
-            // Adjust cursor position after formatting
             if (newValue.length > oldValue.length && (newValue[cursorPosition - 1] === '/')) {
                 e.target.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
             }
         });
 
-        // Date picker button click
         datePickerBtn.addEventListener('click', () => {
             hiddenDatePicker.showPicker();
         });
 
-        // When date is selected from picker
         hiddenDatePicker.addEventListener('change', (e) => {
             const selectedDate = e.target.value;
             if (selectedDate) {
@@ -477,16 +560,67 @@
             e.preventDefault();
             const name = document.getElementById('nameInput').value.trim();
             const date = document.getElementById('dateInput').value.trim();
+            const notes = document.getElementById('notesInput').value.trim();
             
             if (name && date) {
-                const success = addBirthday(name, date);
+                const success = addBirthday(name, date, notes);
                 if (success) {
                     document.getElementById('nameInput').value = '';
                     document.getElementById('dateInput').value = '';
+                    document.getElementById('notesInput').value = '';
                 }
             }
         });
 
+        // Event Listeners - Edit Form
+        const editDateInput = document.getElementById('editDateInput');
+        const editHiddenDatePicker = document.getElementById('editHiddenDatePicker');
+        const editDatePickerBtn = document.getElementById('editDatePickerBtn');
+
+        editDateInput.addEventListener('input', (e) => {
+            const cursorPosition = e.target.selectionStart;
+            const oldValue = e.target.value;
+            const newValue = autoFormatDateInput(oldValue);
+            
+            e.target.value = newValue;
+            
+            if (newValue.length > oldValue.length && (newValue[cursorPosition - 1] === '/')) {
+                e.target.setSelectionRange(cursorPosition + 1, cursorPosition + 1);
+            }
+        });
+
+        editDatePickerBtn.addEventListener('click', () => {
+            editHiddenDatePicker.showPicker();
+        });
+
+        editHiddenDatePicker.addEventListener('change', (e) => {
+            const selectedDate = e.target.value;
+            if (selectedDate) {
+                editDateInput.value = convertDatePickerToDisplay(selectedDate);
+            }
+        });
+
+        document.getElementById('editBirthdayForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('editNameInput').value.trim();
+            const date = document.getElementById('editDateInput').value.trim();
+            const notes = document.getElementById('editNotesInput').value.trim();
+            
+            if (name && date && editTarget !== null) {
+                const success = updateBirthday(editTarget, name, date, notes);
+                if (success) {
+                    hideModal('editModal');
+                    editTarget = null;
+                }
+            }
+        });
+
+        document.getElementById('cancelEdit').addEventListener('click', () => {
+            hideModal('editModal');
+            editTarget = null;
+        });
+
+        // Other Event Listeners
         document.getElementById('exportBtn').addEventListener('click', exportData);
         document.getElementById('importBtn').addEventListener('click', () => showModal('importModal'));
 
@@ -516,6 +650,13 @@
             if (e.target.id === 'importModal') {
                 hideModal('importModal');
                 document.getElementById('importFile').value = '';
+            }
+        });
+
+        document.getElementById('editModal').addEventListener('click', (e) => {
+            if (e.target.id === 'editModal') {
+                hideModal('editModal');
+                editTarget = null;
             }
         });
 
